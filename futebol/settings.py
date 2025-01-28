@@ -33,7 +33,7 @@ INSTALLED_APPS = [
 ]
 
 
-ALLOWED_HOSTS = ['painel.energee.com.br', 'www.painel.energee.com.br','127.0.0.1','185.139.1.143:8005']
+ALLOWED_HOSTS = ['painel.energee.com.br', 'www.painel.energee.com.br','127.0.0.1','185.139.1.143']
 CSRF_TRUSTED_ORIGINS = ['https://painel.energee.com.br']
 
 
