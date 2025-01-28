@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  futebol_web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: futebol_web
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn futebol.wsgi:application --bind 0.0.0.0:8005"
+    volumes:
+      - .:/app
+    ports:
+      - "8005:8005"
+    env_file:
+      - .env
+    depends_on:
+      - futebol_redis
+      - futebol_celery
+    restart: always
+
+  futebol_celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: futebol_celery
+    command: celery -A futebol worker --loglevel=info
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - futebol_redis
+    restart: always
+
+  futebol_celery_beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: futebol_celery_beat
+    command: celery -A futebol beat --loglevel=info
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - futebol_redis
+    restart: always
+
+  futebol_redis:
+    image: redis:7
+    container_name: futebol_redis
+    ports:
+      - "6380:6379"  # Alterado para evitar conflito
+    restart: always
+
+volumes:
+  futebol_redis_data:
