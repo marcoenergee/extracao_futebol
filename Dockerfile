@@ -4,9 +4,9 @@ FROM python:3.12-slim
 # Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Instala dependências do sistema, incluindo Git
+# Instala dependências do sistema, incluindo Git e bibliotecas necessárias para o Playwright
 RUN apt-get update && apt-get install -y \
-    git libpq-dev gcc && \
+    git libpq-dev gcc curl unzip && \
     rm -rf /var/lib/apt/lists/*
 
 # Atualiza pip, setuptools e wheel antes da instalação
@@ -18,8 +18,8 @@ COPY ./requirements.txt /app/
 # Instala as dependências do projeto
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Instala Playwright após as dependências do Python
-RUN pip install --no-cache-dir -r requirements.txt
+# Instala Playwright e baixa os navegadores necessários
+RUN pip install playwright
 RUN playwright install --with-deps
 
 # Copia todo o código do projeto
