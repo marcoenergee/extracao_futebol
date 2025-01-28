@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 # Definição das aplicações instaladas
 INSTALLED_APPS = [
@@ -65,6 +65,8 @@ CORS_ALLOW_METHODS = [
 ]
 
 
+# Arquivos estáticos (CSS, JavaScript, Imagens)
+STATIC_URL = 'static/'
 # Define um diretório para armazenar os arquivos estáticos
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Diretórios adicionais para coletar arquivos estáticos
@@ -140,9 +142,6 @@ LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
-
-# Arquivos estáticos (CSS, JavaScript, Imagens)
-STATIC_URL = 'static/'
 
 # Tipo de campo de chave primária padrão
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
