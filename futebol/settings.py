@@ -130,11 +130,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Configuração do Celery com a nova porta do Redis
-CELERY_BROKER_URL = "redis://futebol_redis:6380/0"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_BACKEND = "redis://futebol_redis:6380/0"
-
+CELERY_BROKER_URL = "redis://futebol_redis:6379/0"
+CELERY_RESULT_BACKEND = "redis://futebol_redis:6379/0"
 
 # Internacionalização
 LANGUAGE_CODE = 'pt-br'
