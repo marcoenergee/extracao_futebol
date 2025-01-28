@@ -65,6 +65,14 @@ CORS_ALLOW_METHODS = [
 ]
 
 
+# Define um diretório para armazenar os arquivos estáticos
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# Diretórios adicionais para coletar arquivos estáticos
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
