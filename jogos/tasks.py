@@ -1,4 +1,5 @@
 import logging
+import re
 from celery import shared_task
 from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
@@ -104,7 +105,8 @@ def scrape_campeonato(self):
                 try:
                     campeonatos = page.query_selector_all("ul.listadoEquipos > li > a")
                     campeonato_atual = campeonatos[i]
-                    campeonato_nome = campeonato_atual.text_content().strip()
+                    #campeonato_nome = campeonato_atual.text_content().strip()
+                    campeonato_nome = re.sub(r"\s*\(\d+\)$", "", campeonato_atual.text_content().strip())
                     logger.info(f"Entrando no campeonato: {campeonato_nome}")
 
                     # Clica no campeonato
