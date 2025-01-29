@@ -12,7 +12,7 @@ admin.site.unregister(Theme)
 
 @admin.register(Campeonato)
 class CampeonatoAdmin(admin.ModelAdmin):
-    list_display = ("nome", "link")
+    list_display = ("nome", )
 
 
 @admin.register(Emissora)
