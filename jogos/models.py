@@ -2,7 +2,6 @@ from django.db import models
 
 class Campeonato(models.Model):
     nome = models.CharField(max_length=255)
-    link = models.URLField(max_length=500)
     status = models.BooleanField(max_length=50, null=True, blank=True, default=True)
 
     def __str__(self):
